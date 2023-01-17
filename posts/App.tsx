@@ -1,4 +1,4 @@
-import { StyleSheet, FlatList, Text, View } from 'react-native';
+import { Dimensions, StyleSheet, FlatList, Image, View } from 'react-native';
 
 const posts = [
   {
@@ -171,23 +171,34 @@ const posts = [
   }
 ]
 
+const {width} = Dimensions.get('window');
+
+const ITEM_LENGTH = width * 0.8; // Item is a square. Therefore, its height and width are of the same length.
+const BORDER_RADIUS = 20;
+
+const styles = StyleSheet.create({
+  container: {},
+  itemImage: {
+    width: '100%',
+    height: ITEM_LENGTH,
+    borderRadius: BORDER_RADIUS,
+    resizeMode: 'cover',
+  },
+});
+
 export default function App() {
   return (
-    <View style={styles.posts}>
+    <View style={styles.container}>
       <FlatList
         data={posts}
         keyExtractor={({ author_username }) => author_username.toString()}
-        renderItem={({ item }) => <Text>{item.author_icon}</Text>}
+        renderItem={({ item }) =><View style={styles.itemImage}> 
+                                    <Image
+                                            style={styles.itemImage} 
+                                            source={{uri: item.post_front}}
+                                    />
+                                </View>}
       />
     </View>
   );
 }
-
-const styles = StyleSheet.create({
-  posts: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
