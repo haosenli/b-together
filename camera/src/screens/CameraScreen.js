@@ -2,7 +2,7 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View,  Button, TouchableOpacity } from 'react-native';
 import { useEffect, useRef, useState } from 'react';
 import { Camera, CameraType} from 'expo-camera';
-import * as MediaLibrary from 'expo-media-library'; 
+import * as MediaLibrary from 'expo-media-library';
 import { useIsFocused } from '@react-navigation/native';
 
 const CameraScreen = ({navigation, route}) => {
