@@ -1,4 +1,4 @@
-import { Dimensions, StyleSheet, FlatList, Image, View } from 'react-native';
+import { Dimensions, Text, StyleSheet, FlatList, Image, View } from 'react-native';
 
 const posts = [
   {
@@ -177,19 +177,42 @@ const ITEM_LENGTH = width * 0.8; // Item is a square. Therefore, its height and 
 const BORDER_RADIUS = 20;
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: 'black'
+},
   itemImage: {
     width: '100%',
     height: ITEM_LENGTH,
     borderRadius: BORDER_RADIUS,
     resizeMode: 'cover',
   },
+  logo: {
+    flex: 0.05,
+    padding: 20,
+  },
+  navbar: {
+    flex: 0.05,
+    padding: 20,
+  },
+  feed: {
+    flex: 1
+  }
 });
 
 export default function App() {
   return (
     <View style={styles.container}>
+      <View style={styles.logo}>
+        <Text style={{padding: 30,
+                     fontSize: 20,
+                     color: 'white',
+                     marginLeft: "-10%"
+                     }}>_.tgr</Text>
+        
+      </View>
       <FlatList
+        style={styles.feed}
         data={posts}
         keyExtractor={({ author_username }) => author_username.toString()}
         renderItem={({ item }) =><View style={styles.itemImage}> 
@@ -198,7 +221,16 @@ export default function App() {
                                             source={{uri: item.post_front}}
                                     />
                                 </View>}
+        ItemSeparatorComponent={() => <View style={{height: 20}} />}
       />
+      <View style={styles.navbar}>
+        <Text style={{padding: 30,
+                     fontSize: 20,
+                     color: 'white',
+                     marginLeft: "27%",
+                     marginTop: "-7%"
+                     }}>temp navbar</Text>
+      </View>
     </View>
   );
 }
